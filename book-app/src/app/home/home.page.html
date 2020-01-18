@@ -12,7 +12,7 @@
       <ion-col align-content-center size-md="7" size-lg="5" size-xs="12">
         <ion-list lines="none">
           <ion-item class="search-bar">
-            <ion-textarea type="search" [(ngModel)]="book" wrap="off" placeholder="Enter an ISBN number"></ion-textarea>
+            <ion-textarea type="search" [(ngModel)]="book" wrap="off" placeholder="Enter a valid ISBN-10 or 13 number"></ion-textarea>
             <ion-button slot="end" class="search-button" (click)="searchBook()">
               <ion-icon name="search"></ion-icon>
             </ion-button>

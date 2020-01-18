@@ -11,8 +11,11 @@ const isbnNumber = '0131103709';
 	const page = await browser.newPage();
 	await page.setViewport({ width: 1320, height: 920});
 
-	await page.goto(`https://www.amazon.com/s?k=${isbn}	&i=stripbooks`);
-	const results = await page.$$('.s-result-list');
+    await page.goto(`https://www.bkstr.com/nebraska-lincolnstore/home`);
+    const searchbar = await page.$('search_1000180941');
+    await searchbar.type(isbn);
+    await searchbar.press('Enter');
+	/*const results = await page.$$('.s-result-list');
 	const firstResult = await results[0];
 	const asin = await firstResult.$eval('div div', element => element.getAttribute('data-asin'));
 	
@@ -34,7 +37,7 @@ const isbnNumber = '0131103709';
 
 	const rentPrice = await priceOptionsBox.$eval(rentPriceId, sanitizePrice);
 	const buyUsedPrice = sanitizePrice(await priceOptionsBox.$$(buyUsedSelector)[1]);
-	const buyNewPrice = await priceOptionsBox
+	const buyNewPrice = await priceOptionsBox*/
 
 	await setTimeout(() => {}, 4000);
 
