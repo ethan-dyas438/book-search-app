@@ -6,17 +6,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
+<ion-content class="ion-text-center">
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col align-content-center size-md="7" size-lg="5" size-xs="12">
         <ion-list lines="none">
           <ion-item class="search-bar">
-            <ion-textarea type="search" [(ngModel)]="book" wrap="off"></ion-textarea>
-            <ion-button slot="end" (click)="searchBook()">
+            <ion-textarea type="search" [(ngModel)]="book" wrap="off" placeholder="Enter an ISBN number"></ion-textarea>
+            <ion-button slot="end" class="search-button" (click)="searchBook()">
               <ion-icon name="search"></ion-icon>
             </ion-button>
           </ion-item>
+          <ion-card *ngFor="let item of priceResults">
+            <ion-card-header>
+              <ion-card-title text-left>
+                <ion-img [src] = item.seller class="seller-logo" hieght="50" width="50"></ion-img>
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content text-left>
+              <p>Rent: ${{ item.rent_price }}</p>
+              <p>Buy Used: ${{ item.buy_used_price }}</p>
+              <p>Buy New: ${{ item.buy_new_price }}</p>
+            </ion-card-content>
+          </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>
