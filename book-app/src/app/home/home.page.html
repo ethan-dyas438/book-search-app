@@ -6,9 +6,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content text-center>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col align-content-center size-md="7" size-lg="5" size-xs="12">
+        <ion-list lines="none">
+          <ion-item class="search-bar">
+            <ion-textarea type="search" [(ngModel)]="book" wrap="off"></ion-textarea>
+            <ion-button slot="end" (click)="searchBook()">
+              <ion-icon name="search"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

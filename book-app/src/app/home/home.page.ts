@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  book: string = "";
 
   constructor() {}
+
+  searchBook() {
+    console.log(this.book);
+  }
 
 }
