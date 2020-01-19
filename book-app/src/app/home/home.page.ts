@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage {
   book: string = "";
+  services = ["amazon", "chegg", "unl-bookstore"];
   priceResults = [
     {
       seller: '../../assets/amazon-logo-rgp.webp',
@@ -17,8 +19,9 @@ export class HomePage {
       link: "https://www.google.com"
     }
   ];
+  apikey = "";
 
-  constructor(public alertController: AlertController) {}
+  constructor(public alertController: AlertController, private http: HttpClient) {}
 
   async searchBook() {
     this.book = this.book.replace(/[-| ]/g, '');
@@ -52,7 +55,11 @@ export class HomePage {
         + 3 * +validISBN[5] + 1 * +validISBN[6] + 3 * +validISBN[7] + 1 * +validISBN[8] + 3 * +validISBN[9]
         + 1 * +validISBN[10] + 3 * +validISBN[11] + 1 * +validISBN[12]) % 10;
       if (isbnCheck == 0) {
-        // resutls = await call;
+        for (let i = 0; i < this.services.length; ++i) {
+          let url = "/listing/:service/" + validISBN;
+          // let results = await this.http.get(`${url}?s=${encodeURI(title)}&type=${type}&apikey=${this.apikey}`);
+          // process results
+        }
       } else {
         await alert.present();
       }
