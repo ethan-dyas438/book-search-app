@@ -13,3 +13,9 @@ ion-img {
     width: 125px;
     height: 125px;
 }
+
+ion-item {
+    --highlight-color-valid: transparent;
+    --highlight-color-invalid: transparent;
+    --highlight-color-focused: transparent;
+}

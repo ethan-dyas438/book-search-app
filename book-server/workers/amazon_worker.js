@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-import { getAttribute } from './helpers/puppeteer_helpers.js';
 
 const isbnNumber = '0131103709';
 
