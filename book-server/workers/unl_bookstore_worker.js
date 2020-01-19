@@ -18,8 +18,7 @@ const isbnNumber = '9780262033848';
     const prices = await page.$$('.purchase-option-item-price');
     // const rentUsed = await page.$$('.purchase-option-item-price')[0].textContent;
     // console.log(rentUsed);
-	const rentNew = await prices[1];
-	console.log(rentNew);
+    const rentNew = await prices[1].textContent;
     const buyUsed = await prices[2].textContent;
     const buyNew = await prices[3].textContent;
     const result = {

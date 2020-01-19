@@ -22,10 +22,12 @@
               <ion-card-header>
                 <ion-card-title text-left>
                   <ion-img [src] = item.seller class="seller-logo" hieght="50" width="50"></ion-img>
+                  <ion-label>{{ item.title }}</ion-label>
                 </ion-card-title>
               </ion-card-header>
               <ion-card-content text-left>
-                <p>Rent: ${{ item.rent_price }}</p>
+                <p>Rent Used: ${{ item.rent_used_price }}</p>
+                <p>Rent New: ${{ item.rent_new_price }}</p>
                 <p>Buy Used: ${{ item.buy_used_price }}</p>
                 <p>Buy New: ${{ item.buy_new_price }}</p>
               </ion-card-content>
