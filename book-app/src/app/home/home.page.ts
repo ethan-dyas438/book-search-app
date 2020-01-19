@@ -13,7 +13,8 @@ export class HomePage {
       seller: '../../assets/amazon-logo-rgp.webp',
       rent_price: "26",
       buy_used_price: "50",
-      buy_new_price: "100"
+      buy_new_price: "100",
+      link: "https://www.google.com"
     }
   ];
 
@@ -58,6 +59,10 @@ export class HomePage {
     } else {
       await alert.present();
     }
+  }
+
+  openWindow(link: string) {
+    window.open(link);
   }
 
 }
