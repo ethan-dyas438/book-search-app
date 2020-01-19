@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
-import BookListing from './book_listing'
-import { findFirstInNodeList } from './helpers/document_utils';
+import BookListing from './book_listing.js';
+import { findFirstInNodeList } from './helpers/document_utils.js';
 
 export default async function scrapListing(isbn) {
 	const browser = await puppeteer.launch({
@@ -12,15 +12,29 @@ export default async function scrapListing(isbn) {
 	await page.setViewport({ width: 1320, height: 920});
 
 	await page.goto(`https://www.amazon.com/s?k=${isbn}	&i=stripbooks`);
-	const results = await page.$$('.s-result-list');
-	const firstResult = await findFirstInNodeList(results);
-	const asin = await firstResult.$eval('div div', element => element.getAttribute('data-asin'));
+	const url = await page.$eval('.s-result-list', results => {
+		for (const element of results.children) {
+			const result = element.querySelector('div > div > span > div > div');
+			if (result.getAttribute('data-component-type') !== 'sp-sponsored-result') {
+				return result.querySelector('.a-link-normal .a-text-normal').parentElement.href;
+			}
+		}
+		return null;
+	});
+	// const firstResult = await findFirstInNodeList(results.children, element => {
+	// 	console.log('test');
+	// 	return element.$eval('div > div > span > div > div', e => {
+	// 		console.log(`${e.getAttribute('data-component-type')}`);
+	// 		return e.getAttribute('data-component-type') !== 'sp-sponsored-result'
+	// 	});
+	// });
+	// const asin = await firstResult.$eval('div div', element => element.getAttribute('data-asin'));
 	
-	const title = await page.$eval('.s-result-list .a-size-medium', element => element.textContent);
+	// const title = await page.$eval('.s-result-list .a-size-medium', element => element.textContent);
 
-	const url = await firstResult.$eval('.a-link-normal .a-text-normal', element => element.parentElement.href);
+	// const url = await firstResult.$eval('.a-link-normal .a-text-normal', element => element.parentElement.href);
 
-	console.log(`The asin is ${asin} and title is ${title}.`);
+	// console.log(`The asin is ${asin} and title is ${title}.`);
 	
 	console.log(`Url is: ${url}`);
 	await page.goto(url);
