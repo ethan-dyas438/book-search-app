@@ -43,6 +43,9 @@ export default async function scrapListing(isbn) {
 	const rentPriceId = '#rentPrice';
 	const buyPriceSelectors = '.a-size-medium.a-color-secondary.header-price';
 	
+	const productTitleId = '#productTitle';
+	const contributorNameClass = '.a-link-normal.contributorNameID';
+
 	const priceOptionsBox = await page.$(`${priceOptionsBoxId} div`);
 	const sanitizePrice = element => Number(element.textContent.trim().substring(1));
 
@@ -54,8 +57,11 @@ export default async function scrapListing(isbn) {
 		return Number(priceOptions.querySelectorAll(buyPriceSelectors)[1].textContent.trim().substring(1));
 	}, { buyPriceSelectors });
 
+	const title = await page.$eval(productTitleId, element => element.textContent);
+	const author = await page.$eval(contributorNameClass, element => element.textContent);
+
 	console.log(`Rent Used Price: ${rentUsedPrice}, Used Price: ${buyUsedPrice}, New Price: ${buyNewPrice}.`);
-	const bookListing = new BookListing(url, {
+	const bookListing = new BookListing(url, title, author, {
 		buyNewPrice,
 		buyUsedPrice,
 		rentUsedPrice

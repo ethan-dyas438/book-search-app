@@ -1,6 +1,8 @@
 export default class BookListing {
-	constructor(url, { buyNewPrice, buyUsedPrice, rentNewPrice, rentUsedPrice }) {
+	constructor(url, title, author, { buyNewPrice, buyUsedPrice, rentNewPrice, rentUsedPrice }) {
 		this.url = url;
+		this.title = title;
+		this.author = author;
 
 		this.buyNewPrice = buyNewPrice ? buyNewPrice : null;
 		this.buyUsedPrice = buyUsedPrice ? buyUsedPrice : null;
@@ -9,6 +11,8 @@ export default class BookListing {
 	}
 	get json() {
 		return {
+			title: this.title,
+			author: this.author,
 			url: this.url,
 			buyNewPrice: this.buyNewPrice, 
 			buyUsedPrice: this.buyUsedPrice, 
