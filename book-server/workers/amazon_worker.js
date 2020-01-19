@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
-import BookListing from './book_listing'
-import { findFirstInNodeList } from './helpers/document_utils';
+import BookListing from './book_listing.js';
+import { findFirstInNodeList } from './helpers/document_utils.js';
 
 export default async function scrapListing(isbn) {
 	const browser = await puppeteer.launch({
