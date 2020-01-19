@@ -4,7 +4,7 @@ import { findFirstInNodeList } from './helpers/document_utils.js';
 
 export default async function scrapListing(isbn) {
 	const browser = await puppeteer.launch({
-		headless: false,
+		headless: true,
 		args: ['--start-fullscreen']
 	});
 
@@ -45,16 +45,12 @@ export default async function scrapListing(isbn) {
 	const title = await page.$eval(productTitleId, element => element.textContent);
 	const author = await page.$eval(contributorNameClass, element => element.textContent);
 
-	console.log(`Rent Used Price: ${rentUsedPrice}, Used Price: ${buyUsedPrice}, New Price: ${buyNewPrice}.`);
 	const bookListing = new BookListing(url, title, author, {
 		buyNewPrice,
 		buyUsedPrice,
 		rentUsedPrice
 	});
-	console.log(bookListing.json);
-
-	await setTimeout(() => {}, 4000);
-
+	
 	browser.close();
 	return bookListing.json;
 };
