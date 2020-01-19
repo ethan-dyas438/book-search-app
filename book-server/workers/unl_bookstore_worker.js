@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-const isbnNumber = '0131103709';
+const isbnNumber = '9780262033848';
 
 (async (isbn) => {
 	const browser = await puppeteer.launch({
@@ -12,15 +12,23 @@ const isbnNumber = '0131103709';
 	await page.setViewport({ width: 1320, height: 920});
 
     await page.goto(`https://www.bkstr.com/nebraska-lincolnstore/home`);
-    const searchbar = await page.$('search_1000180941');
+    const searchbar = await page.$('#search_1000180941');
     await searchbar.type(isbn);
     await searchbar.press('Enter');
-	/*const results = await page.$$('.s-result-list');
-	const firstResult = await results[0];
-	const asin = await firstResult.$eval('div div', element => element.getAttribute('data-asin'));
-	
-	const title = await page.$eval('.s-result-list .a-size-medium', element => element.textContent);
-
+    const prices = await page.$$('.purchase-option-item-price');
+    // const rentUsed = await page.$$('.purchase-option-item-price')[0].textContent;
+    // console.log(rentUsed);
+    const rentNew = await prices[1].textContent;
+    const buyUsed = await prices[2].textContent;
+    const buyNew = await prices[3].textContent;
+    const result = {
+        rentUsed,
+        rentNew,
+        buyUsed,
+        buyNew
+    };
+    console.log(result);
+	/*
 	const url = await firstResult.$eval('.a-link-normal .a-text-normal', element => element.parentElement.href);
 
 	console.log(`The asin is ${asin} and title is ${title}.`);
@@ -41,5 +49,5 @@ const isbnNumber = '0131103709';
 
 	await setTimeout(() => {}, 4000);
 
-	browser.close();
+	// browser.close();
 })(isbnNumber);
