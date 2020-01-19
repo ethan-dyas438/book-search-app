@@ -21,22 +21,7 @@ export default async function scrapListing(isbn) {
 		}
 		return null;
 	});
-	// const firstResult = await findFirstInNodeList(results.children, element => {
-	// 	console.log('test');
-	// 	return element.$eval('div > div > span > div > div', e => {
-	// 		console.log(`${e.getAttribute('data-component-type')}`);
-	// 		return e.getAttribute('data-component-type') !== 'sp-sponsored-result'
-	// 	});
-	// });
-	// const asin = await firstResult.$eval('div div', element => element.getAttribute('data-asin'));
 	
-	// const title = await page.$eval('.s-result-list .a-size-medium', element => element.textContent);
-
-	// const url = await firstResult.$eval('.a-link-normal .a-text-normal', element => element.parentElement.href);
-
-	// console.log(`The asin is ${asin} and title is ${title}.`);
-	
-	console.log(`Url is: ${url}`);
 	await page.goto(url);
 
 	const priceOptionsBoxId = '#mediaTab_content_landing';

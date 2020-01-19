@@ -1,6 +1,9 @@
 import express from 'express';
 import requestFromAmazon from './workers/amazon_worker.js';
+import cors from 'cors';
 const app = express();
+
+app.use(cors());
 
 app.get('/listing/:service/:isbn', async (request, response) => {
 	const isbn = request.params.isbn.trim();
