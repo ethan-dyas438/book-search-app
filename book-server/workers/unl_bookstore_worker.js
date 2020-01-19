@@ -12,7 +12,7 @@ const isbnNumber = '0131103709';
 	await page.setViewport({ width: 1320, height: 920});
 
     await page.goto(`https://www.bkstr.com/nebraska-lincolnstore/home`);
-    const searchbar = await page.$('search_1000180941');
+    const searchbar = await page.$('#search_1000180941');
     await searchbar.type(isbn);
     await searchbar.press('Enter');
 	/*const results = await page.$$('.s-result-list');
