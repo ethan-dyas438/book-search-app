@@ -35,16 +35,16 @@ export class HomePage {
     if (isbnCheck) {
       for (const service of this.services) {
         // let results = await this.http.get(`http://localhost:8081/listing/${service}/${validISBN}`);
-        console.log(this.http.get(`http://localhost:8081/listing/${service}/${validISBN}`).subscribe((result) => {
+        console.log(this.http.get(`http://localhost:8081/listing/${service}/${validISBN}`).subscribe((result: Map<String, String>) => {
           console.log(result);
           let filteredResult = {
             seller: this.serviceLogos[service],
-            title: result.title + ", " + result.author,
-            link: result.url,
-            rent_used_price: result.rentUsedPrice || "---",
-            rent_new_price: result.rentNewPrice || "---",
-            buy_used_price: result.buyUsedPrice || "---",
-            buy_new_price: result.buyNewPrice || "---"
+            title: result.get("title") + ", " + result.get("author"),
+            link: result.get("url"),
+            rent_used_price: result.get("rentUsedPrice") || "---",
+            rent_new_price: result.get("rentNewPrice") || "---",
+            buy_used_price: result.get("buyUsedPrice") || "---",
+            buy_new_price: result.get("buyNewPrice") || "---"
           }
           this.priceResults.push(filteredResult);
         }));
